@@ -55,8 +55,8 @@ class Station:
 def draw_circle(canvas, x, y, radius, color):
     c.create_oval(x - radius, y - radius, x + radius, y + radius, fill=color)
 
-def draw_line(canvas, x1, y1, x2, y2):
-    canvas.create_line(x1, y1, x2, y2, dash=(4, 2), fill="cyan")
+def draw_line(canvas, x1, y1, x2, y2, color):
+    canvas.create_line(x1, y1, x2, y2, dash=(4, 2), fill=color, width=1)
 
 
 def is_within(a, b, r):
@@ -83,21 +83,76 @@ for i in stations:
             
 print(f'There are {len(stations)} stations.')
 
-# Generate station connections
+# Generate simple station connections
 connections = []
 for i in range(len(stations)):
     for j in range(i, len(stations)):
         if stations[i].distance(stations[j]) < 200:
             connections.append((stations[i],stations[j]))
 
-print(f'There are {len(connections)} connections.')
+newConnections = []
+# Generate new station connections
+for i in range(len(stations)):
+    for j in range(i + 1, len(stations)):
+        if stations[i].distance(stations[j]) < 200:
+            newConnections.append((stations[i], stations[j], stations[i].distance(stations[j]), True))
+
+# Crop too long connections
+croppedConnections = []
+
+for i in stations:
+    # Smallest connections in 4 directions
+    LD_Min = float('inf')
+    LU_Min = float('inf')
+    RD_Min = float('inf')
+    RU_Min = float('inf')
+    LD_Con = None
+    LU_Con = None
+    RD_Con = None
+    RU_Con = None
+
+
+    for j in newConnections:
+        if i == j[0]: # If the station under consideration is the start of the connection
+            
+            
+            if j[0].get_x() < j[1].get_x() and j[0].get_y() < j[1].get_y():
+                if j[2] < RD_Min:
+                    RD_Con = j
+
+
+            elif j[0].get_x() >= j[1].get_x() and j[0].get_y() < j[1].get_y():                
+                if j[2] < LD_Min:
+                    LD_Con = j
+
+            if j[0].get_x() < j[1].get_x() and j[0].get_y() >= j[1].get_y():                
+                if j[2] < RU_Min:
+                    RU_Con = j
+
+            else:
+                if j[2] < LU_Min:
+                    LU_Con = j
+
+    croppedConnections.extend([LD_Con, LU_Con, RD_Con, RU_Con])        
+    #print(f"LD_Con: {LD_Con}")
+    #print(f"LU_Con: {LU_Con}")
+    #print(f"RD_Con: {RD_Con}")
+    #print(f"RU_Con: {RU_Con}")
+    #print()
+
+
+
+
+#for i in connections:
+    #draw_line(c, i[0].get_x(), i[0].get_y(), i[1].get_x(), i[1].get_y(), "cyan")
+
+for i in croppedConnections:
+    if i != None:
+        draw_line(c, i[0].get_x(), i[0].get_y(), i[1].get_x(), i[1].get_y(), "cyan")
 
 # Display stations
 for i in stations:
-    draw_circle(c,i.get_x(), i.get_y(), 5, i.get_color())
-
-for i in connections:
-    draw_line(c, i[0].get_x(), i[0].get_y(), i[1].get_x(), i[1].get_y())
+    draw_circle(c,i.get_x(), i.get_y(), 8, i.get_color())
 
 win.mainloop()
 
