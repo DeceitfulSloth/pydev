@@ -2,6 +2,7 @@
 from tkinter import *
 import random
 import math
+from PIL import Image,ImageTk
 
 #Create an instance of tkinter frame
 win= Tk()
@@ -154,6 +155,10 @@ def render(con, stat):
     # Display stations
     for i in stat:
         draw_circle(c,i.get_x(), i.get_y(), 8, i.get_color())
+
+    # Draw ship
+    ship= ImageTk.PhotoImage(Image.open("resources/ship_01.png"))
+    c.create_image(10,10,anchor=NW, image = ship)
 
 render(croppedConnections, stations)
 
