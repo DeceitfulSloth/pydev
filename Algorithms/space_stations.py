@@ -184,7 +184,7 @@ def click_handler(event):
 
 
 def on_mousewheel(event):
-    #self.canvas.yview_scroll(-1*(event.delta/120), "units")
+    
     print(event)
 
 
