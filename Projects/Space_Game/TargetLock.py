@@ -31,10 +31,12 @@ def on_mouse_scroll(x, y, scroll_x, scroll_y):
     
     global ZOOM
     
-    if scroll_y == 1.0 and ZOOM < 1.0:
+    if scroll_y == 1.0 and ZOOM < 1.5:
         ZOOM = ZOOM * 1.1
     elif scroll_y == -1.0:
         ZOOM = ZOOM * 0.9
+
+    print(ZOOM)
 
 @game_window.event
 def on_draw():

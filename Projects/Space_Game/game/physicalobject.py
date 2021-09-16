@@ -38,8 +38,11 @@ class PhysicalObject(pyglet.sprite.Sprite):
         
 
     def render(self, CAMERA_POSITION, SCREEN_SIZE, ZOOM):
-        
-        self.scale = ZOOM
+        if ZOOM < 0.1:
+            self.image = resources.white_circle
+            self.scale = 1
+        else:
+            self.scale = ZOOM
         
         un_zoomed_x = ((self.global_x_position - CAMERA_POSITION[0]) + SCREEN_SIZE[0]/2)
         un_zoomed_y = (self.global_y_position - CAMERA_POSITION[1]) + SCREEN_SIZE[1]/2
