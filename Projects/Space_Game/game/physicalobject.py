@@ -1,3 +1,4 @@
+from game import resources
 import pyglet
 from . import util
 

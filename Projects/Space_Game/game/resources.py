@@ -23,6 +23,20 @@ center_image(player_image_thrust)
 other_ship_image = pyglet.resource.image("ship_05.png",rotate=90)
 center_image(other_ship_image)
 
+white_circle = pyglet.resource.image("white_circle.png")
+center_image(white_circle)
+
+blue_circle = pyglet.resource.image("blue_circle.png")
+center_image(blue_circle)
+
+green_circle = pyglet.resource.image("green_circle.png")
+center_image(green_circle)
+
+red_circle = pyglet.resource.image("red_circle.png")
+center_image(red_circle)
+
+yellow_circle = pyglet.resource.image("yellow_circle.png")
+center_image(yellow_circle)
 
 # Load background stars
 #star_image = pyglet.resource.image("star.png")
