@@ -24,14 +24,12 @@ class Player(physicalobject.PhysicalObject):
         # Do all the normal physics stuff
         x1, y1 = super(Player, self).move(dt)
 
-        if self.key_handler[key.LEFT]:
+        if self.key_handler[key.A]:
             self.rotation -= self.rotate_speed * dt
-        if self.key_handler[key.RIGHT]:
+        if self.key_handler[key.D]:
             self.rotation += self.rotate_speed * dt
-        if self.key_handler[key.Q]:
-            print('Q')
         
-        if self.key_handler[key.UP]:
+        if self.key_handler[key.W]:
             angle_radians = -math.radians(self.rotation)
             force_x = math.cos(angle_radians) * self.thrust * dt
             force_y = math.sin(angle_radians) * self.thrust * dt
@@ -42,7 +40,7 @@ class Player(physicalobject.PhysicalObject):
         else:
             self.image = resources.player_image
 
-        return (x1, y1)
+        return x1, y1
 
     
 
