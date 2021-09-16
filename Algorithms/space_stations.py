@@ -157,7 +157,7 @@ def render(con, stat):
         draw_circle(c,i.get_x(), i.get_y(), 8, i.get_color())
 
     # Draw ship
-    ship= ImageTk.PhotoImage(Image.open("resources/ship_01.png"))
+    ship= ImageTk.PhotoImage(Image.open("resources/ships/Ship_01.png"))
     c.create_image(10,10,anchor=NW, image = ship)
 
 render(croppedConnections, stations)
