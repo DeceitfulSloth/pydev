@@ -17,18 +17,17 @@ class PhysicalObject(pyglet.sprite.Sprite):
         self.velocity_x, self.velocity_y = 0.0, 0.0
 
         self.isFocus = False
-
+        self.base_image = self.image
         
         self.global_x_position = global_x_position
         self.global_y_position = global_y_position
 
-        self.x = self.global_x_position + CAMERA_POSITION[0]
-        self.y = self.global_y_position + CAMERA_POSITION[1]
+        self.x = self.global_x_position + CAMERA_POSITION[0] + 200
+        self.y = self.global_y_position + CAMERA_POSITION[1] + 200
 
     def move(self, dt):
         """This method should be called every frame."""
 
-        # Update position according to velocity and time
         self.global_x_position += self.velocity_x * dt
         self.global_y_position += self.velocity_y * dt
 
@@ -43,6 +42,7 @@ class PhysicalObject(pyglet.sprite.Sprite):
             self.image = resources.white_circle
             self.scale = 1
         else:
+            self.image = self.base_image
             self.scale = ZOOM
         
         un_zoomed_x = ((self.global_x_position - CAMERA_POSITION[0]) + SCREEN_SIZE[0]/2)
