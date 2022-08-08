@@ -24,7 +24,6 @@ class Player(physicalobject.PhysicalObject):
         # Do all the normal physics stuff
         x1, y1 = super(Player, self).move(dt)
 
-        
         if self.key_handler[key.A]:
             self.rotation -= self.rotate_speed * dt
         if self.key_handler[key.D]:
@@ -43,20 +42,19 @@ class Player(physicalobject.PhysicalObject):
 
         return x1, y1
 
-
-    def render(self, CAMERA_POSITION, SCREEN_SIZE, ZOOM):
-        if ZOOM < 0.1:
-            self.image = resources.white_circle
+    def render(self, camera_position, screen_size, zoom):
+        if zoom < 0.1:
+            self.image = resources.green_circle
             self.scale = 1
         else:
             #self.image = resources.player_image
-            self.scale = ZOOM
+            self.scale = zoom
         
-        un_zoomed_x = ((self.global_x_position - CAMERA_POSITION[0]) + SCREEN_SIZE[0]/2)
-        un_zoomed_y = (self.global_y_position - CAMERA_POSITION[1]) + SCREEN_SIZE[1]/2
+        un_zoomed_x = ((self.global_x_position - camera_position[0]) + screen_size[0] / 2)
+        un_zoomed_y = (self.global_y_position - camera_position[1]) + screen_size[1] / 2
 
-        self.x = util.apply_zoom(un_zoomed_x, SCREEN_SIZE[0], ZOOM)
-        self.y = util.apply_zoom(un_zoomed_y, SCREEN_SIZE[1], ZOOM)
+        self.x = util.apply_zoom(un_zoomed_x, screen_size[0], zoom)
+        self.y = util.apply_zoom(un_zoomed_y, screen_size[1], zoom)
     
 
 

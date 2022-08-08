@@ -37,7 +37,3 @@ center_image(red_circle)
 
 yellow_circle = pyglet.resource.image("yellow_circle.png")
 center_image(yellow_circle)
-
-# Load background stars
-#star_image = pyglet.resource.image("star.png")
-#center_image(star_image)

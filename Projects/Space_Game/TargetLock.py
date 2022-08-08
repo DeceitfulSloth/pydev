@@ -1,6 +1,5 @@
 import pyglet
-from game import load, physicalobject, player, resources
-from pyglet.window import key
+from game import load, player
 
 # Set up a window
 game_window = pyglet.window.Window()
@@ -14,9 +13,6 @@ PAUSED = False
 
 main_batch = pyglet.graphics.Batch()
 
-# Add the background stars
-#stars = load.stars(SCREEN_SIZE, 50, main_batch, CAMERA_POSITION)
-
 # Initialize the player sprite and other ship
 player_ship = player.Player(0, 0, CAMERA_POSITION, batch=main_batch)
 other_ship = load.other_ship(500, 0, CAMERA_POSITION, main_batch)
@@ -27,6 +23,7 @@ game_objects = [player_ship] + [other_ship]
 # Tell the main window that the player object responds to events
 game_window.push_handlers(player_ship.key_handler)
 
+
 @game_window.event       
 def on_mouse_scroll(x, y, scroll_x, scroll_y):
     global ZOOM
@@ -36,13 +33,10 @@ def on_mouse_scroll(x, y, scroll_x, scroll_y):
         ZOOM = ZOOM * 0.9
 
 
-
-
 @game_window.event
 def on_draw():
     game_window.clear()
     main_batch.draw()
-
 
 
 def update(dt):
@@ -52,7 +46,7 @@ def update(dt):
     global PAUSED
     
     # Allow dynamic camera change.
-    if PAUSED == False:
+    if PAUSED is False:
         for obj in game_objects:
             # Move camera to player ship
             # obj.update(dt, SCREEN_SIZE, CAMERA_POSITION)
@@ -63,8 +57,6 @@ def update(dt):
     # Render all objects    
     for obj in game_objects:
         obj.render(CAMERA_POSITION, SCREEN_SIZE, ZOOM)
-
-        
 
     
 if __name__ == "__main__":
