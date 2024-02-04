@@ -1,0 +1,9 @@
+Oil
+Cotton
+Coal
+Iron ore
+Lumber
+Pure water
+Fish
+Crops
+Animals
